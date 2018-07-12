@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>面包诱惑</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="css/swiper-4.1.0.min.css" />
+		<link rel="stylesheet" href="css/test.css" />
+	</head>
+
+	<body>
+		<div id="main">
+			<header>
+				<div><input placeholder="请输入内容"><i class="fa fa-search"></i></div>
+				<ul>
+					<li>
+						<a href="login.html">登录</a>
+					</li>
+					<li>
+						<a href="register.html">注册</a>
+					</li>
+					<li id="cart">
+						<a href="purchase.html"><i class="fa fa-shopping-cart"></i> {{counter1}}</a>
+					</li>
+				</ul>
+
+			</header>
+			<div style="clear: both;"></div>
+			<nav>
+				<a href="index.html"><img src="images/logo.jpg" /></a>
+				<div>
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+							<a href="products.html">所有产品</a>
+						</li>
+						<li>
+							<a href="introduction.html">公司简介</a>
+						</li>
+						<li>
+							<a href="contact.html">联系我们</a>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+			<div style="clear: both;"></div>
+			<div id="crumb">
+				<a href="index.html">所有产品</a><i class="fa fa-angle-right"></i>
+				<span>营养早餐</span>
+
+			</div>
+			<div id="text_box">
+				<div id="text_box_cont">
+					<div id="details_left">
+						<img src="images/detail01.jpg" />
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide"><img src="images/detail01.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail02.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail03.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail04.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail05.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail06.jpg" /></div>
+								<div class="swiper-slide"><img src="images/detail07.jpg" /></div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+
+					</div>
+					<div id="details_right">
+						<h2>营养早餐</h2>
+						<p>全麦土司，甜甜圈，芝士土司，草莓蛋卷，千层糕，各种早餐搭配</p>
+						<p>￥12.00</p>
+						<hr />
+						<p>选择数量</p>
+						<div id="count"><button v-on:click="if(counter==0) return false;counter-=1" class="calculator">-</button>
+							<div class="num">{{counter}}</div><button v-on:click="counter+=1" class="calculator">+</button></div>
+						<div style="clear: both;"></div>
+						<button class="buy cart" v-on:click="counter1=counter"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+						<a href="purchase.html"><button class="buy">立即购买</button></a>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_left">
+					<div>
+						<p>关于我们</p>
+						<p>公司简介</p>
+						<p>发展历程</p>
+						<p>黑色系列</p>
+					</div>
+					<div>
+						<p>友情链接</p>
+						<p>早餐系列</p>
+						<p>简餐系列</p>
+						<p>饮品系列</p>
+					</div>
+					<div>
+						<p>联系我们</p>
+						<p>地址链接</p>
+						<p>微博账号</p>
+						<p>微信账号</p>
+					</div>
+				</div>
+				<div id="footer_right">
+					<div>
+						<p>微信二维码</p><img src="images/1.gif" /></div>
+					<div>
+						<p>微博二维码</p><img src="images/1.gif" /></div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+		<script src="js/swiper-4.1.0.min.js"></script>
+		<script>
+			new Vue({
+				el: "#main",
+				data: {
+					counter: 0,
+					counter1: 0,
+				}
+			})
+			$(function() {
+				$(".swiper-slide img").each(function() {
+					$(this).click(function() {
+						var src = $(this).attr("src");
+						$("#details_left>img").attr("src", src);
+					})
+				})
+
+				$("#count button").click(function() {
+
+				})
+
+				var appendNumber = 4;
+				var prependNumber = 1;
+				var swiper = new Swiper('.swiper-container', {
+					slidesPerView: 3,
+					centeredSlides: true,
+					spaceBetween: 30,
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+				});
+				document.querySelector('.prepend-2-slides').addEventListener('click', function(e) {
+					e.preventDefault();
+					swiper.prependSlide([
+						'<div class="swiper-slide">Slide ' + (--prependNumber) + '</div>',
+						'<div class="swiper-slide">Slide ' + (--prependNumber) + '</div>'
+					]);
+				});
+				document.querySelector('.prepend-slide').addEventListener('click', function(e) {
+					e.preventDefault();
+					swiper.prependSlide('<div class="swiper-slide">Slide ' + (--prependNumber) + '</div>');
+				});
+				document.querySelector('.append-slide').addEventListener('click', function(e) {
+					e.preventDefault();
+					swiper.appendSlide('<div class="swiper-slide">Slide ' + (++appendNumber) + '</div>');
+				});
+				document.querySelector('.append-2-slides').addEventListener('click', function(e) {
+					e.preventDefault();
+					swiper.appendSlide([
+						'<div class="swiper-slide">Slide ' + (++appendNumber) + '</div>',
+						'<div class="swiper-slide">Slide ' + (++appendNumber) + '</div>'
+					]);
+				});
+
+			})
+		</script>
+		<style>
+			/*改变了颜色和加粗的样式*/
+			
+			.swiper-button-next {
+				background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L5%2C44l-4.2-4.2L18.6%2C22L0.8%2C4.2L5%2C0z'%20fill%3D'%23D5D5D3'%2F%3E%3C%2Fsvg%3E");
+			}
+			
+			.swiper-button-prev {
+				background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l4.2%2C4.2L8.4%2C22l17.8%2C17.8L22%2C44L0%2C22z'%20fill%3D'%23D5D5D3'%2F%3E%3C%2Fsvg%3E");
+			}
+		</style>
+	</body>
+
+</html>

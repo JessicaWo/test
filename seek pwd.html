@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>面包诱惑</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="css/test.css" />
+	</head>
+
+	<body>
+		<div id="main">
+			<header>
+				<div><input placeholder="请输入内容"><i class="fa fa-search"></i></div>
+				<ul>
+					<li>
+						<a href="login.html">登录</a>
+					</li>
+					<li>
+						<a href="register.html">注册</a>
+					</li>
+					<li><i class="fa fa-shopping-cart"></i></li>
+				</ul>
+
+			</header>
+			<div style="clear: both;"></div>
+			<nav>
+				<a href="index.html"><img src="images/logo.jpg" /></a>
+				<div>
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+							<a href="products.html">所有产品</a>
+						</li>
+						<li>
+							<a href="introduction.html">公司简介</a>
+						</li>
+						<li>
+							<a href="contact.html">联系我们</a>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+			<div style="clear: both;"></div>
+
+			<div id="login">
+				<div id="login_content">
+					<form>
+						<p>重置密码</p>
+						<div><input id="seek_user" type="text" placeholder="手机/邮箱" /><label class="prompt"></label></div>
+						<div><input id="seek_captcha" style="width: 210px;" type="text" placeholder="验证码" /><button class="captcha" type="button">获取验证码</button></div>
+						<label id="prompt" class="prompt"></label>
+						<div><input id="seek_pwd" type="password" placeholder="输入密码" /><label class="prompt"></label></div>
+						<div><input id="seek_repwd" type="password" placeholder="确认密码" /><label class="prompt"></label></div>
+						<div style="clear: both;"></div>
+						<button id="seek_confirm" class="confirm" type="submit">确定</button>
+					</form>
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_left">
+					<div>
+						<p>关于我们</p>
+						<p>公司简介</p>
+						<p>发展历程</p>
+						<p>黑色系列</p>
+					</div>
+					<div>
+						<p>友情链接</p>
+						<p>早餐系列</p>
+						<p>简餐系列</p>
+						<p>饮品系列</p>
+					</div>
+					<div>
+						<p>联系我们</p>
+						<p>地址链接</p>
+						<p>微博账号</p>
+						<p>微信账号</p>
+					</div>
+				</div>
+				<div id="footer_right">
+					<div>
+						<p>微信二维码</p><img src="images/1.gif" /></div>
+					<div>
+						<p>微博二维码</p><img src="images/1.gif" /></div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+		<script>
+			$(function() {
+				var check = false;
+				var re = /^[1][3,4,5,7,8][0-9]{9}$/;
+				$("#login_content div :input").blur(function() {
+					var phone = $("#seek_user").val();
+					if($.trim(phone) == "") {
+						$("#seek_user").siblings().html("请输入邮箱/手机号！");
+						check = false;
+					} else if(!(phone.length == 11 && re.test(phone))) {
+						$("#seek_user").siblings().html("手机格式不对！");
+						check = false;
+					} else {
+						$("#seek_user").siblings().html("");
+						check = true;
+					}
+
+					if($(this).is("#seek_captcha")) {
+						if($.trim(this.value) == "") {
+							$("#prompt").html("请输入验证码！");
+							check = false;
+						} else {
+							$("#prompt").html("");
+							check = true;
+						}
+					}
+					if($(this).is("#seek_pwd")) {
+						if($.trim(this.value) == "") {
+							$("#seek_pwd").siblings().html("请输入新密码！");
+							check = false;
+						} else {
+							$("#seek_pwd").siblings().html("");
+							check = true;
+						}
+					}
+					var pwd = $("#seek_pwd").val();
+					var repwd = $("#seek_repwd").val();
+					if($(this).is("#seek_repwd")) {
+						if($.trim(this.value) == "") {
+							$("#seek_repwd").siblings().html("请确认新密码！");
+							check = false;
+						} else {
+							if(pwd != repwd) {
+								$("#seek_repwd").siblings().html("密码不一致！");
+								check = false;
+
+							} else {
+								$("#seek_repwd").siblings().html("");
+								check = true;
+							}
+
+						}
+					}
+				}).keyup(function() {
+					//triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+					$(this).triggerHandler("blur");
+				})
+				//点击重置按钮时，触发文本框的失去焦点事件
+
+				$("#seek_confirm").click(function() {
+					//trigger 事件执行完后，浏览器会为submit按钮获得焦点
+					$("#login_content div :input").trigger("blur");
+					if(!check) {
+						return false;
+					}
+					alert("密码重置成功，返回'登陆'界面！");
+					window.location.href = 'login.html';
+					return false;
+				});
+
+				/*仿刷新：检测是否存在cookie*/
+				if($.cookie("captcha")) {
+					var count = $.cookie("captcha");
+					var btn = $('.captcha');
+					btn.text(count + '秒后可重新获取').attr('disabled', true).css({
+						'cursor': 'not-allowed',
+						"background": "gray"
+					});
+					var resend = setInterval(function() {
+						count--;
+						if(count > 0) {
+							btn.text(count + '秒后可重新获取').attr('disabled', true).css({
+								'cursor': 'not-allowed',
+								"background": "gray"
+							});
+							$.cookie("captcha", count, {
+								path: '/',
+								expires: (1 / 86400) * count
+							});
+						} else {
+							clearInterval(resend);
+							btn.text("获取验证码").removeClass('disabled').removeAttr('disabled style');
+						}
+					}, 1000);
+				}
+
+				/*点击改变按钮状态，已经简略掉ajax发送短信验证的代码*/
+				$('.captcha').click(function() {
+					var phone = $("#seek_user").val();
+					var re = /^[1][3,4,5,7,8][0-9]{9}$/;
+					if($.trim(phone) == "") {
+						$("#seek_user").siblings().html("请输入邮箱/手机号！");
+
+					} else if(!(phone.length == 11 && re.test(phone))) {
+						$("#seek_user").siblings().html("手机格式不对！");
+					} else {
+						$("#seek_user").siblings().html("");
+						var btn = $(this);
+						var count = 60;
+						var resend = setInterval(function() {
+							count--;
+							if(count > 0) {
+								btn.text(count + "秒后可重新获取");
+								$.cookie("captcha", count, {
+									path: '/',
+									expires: (1 / 86400) * count
+								});
+							} else {
+								clearInterval(resend);
+								btn.text("获取验证码").removeAttr('disabled style');
+							}
+						}, 1000);
+						btn.attr('disabled', true).css({
+							'cursor': 'not-allowed',
+							"background": "gray"
+						});
+					}
+
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

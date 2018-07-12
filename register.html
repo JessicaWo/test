@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>面包诱惑</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />		
+		<link rel="stylesheet" href="css/test.css" />
+		
+	</head>
+	<body>
+		<div id="main">
+		<header>
+				<div><input placeholder="请输入内容"><i class="fa fa-search"></i></div>
+				<ul>
+					<li>
+						<a href="login.html">登录</a>
+					</li>
+					<li>
+						<a href="register.html">注册</a>
+					</li>
+					<li><i class="fa fa-shopping-cart"></i></li>
+				</ul>
+
+			</header>
+			<div style="clear: both;"></div>
+			<nav>
+				<a href="index.html"><img src="images/logo.jpg" /></a>
+				<div>
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+							<a href="products.html">所有产品</a>
+						</li>
+						<li>
+							<a href="introduction.html">公司简介</a>
+						</li>
+						<li>
+							<a href="contact.html">联系我们</a>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+			<div style="clear: both;"></div>
+			
+			<div id="login">
+				<div id="login_content">
+					<form>
+					<p>注册</p>
+					<div><input id="register_user" type="text" placeholder="手机/邮箱/用户名"/><label class="prompt"></label></div>
+					<div><input id="register_pwd" type="password" placeholder="设置密码"/><label class="prompt"></label></div>
+					<div><input id="register_repwd" type="password" placeholder="确认密码"/><label class="prompt"></label></div>
+					<div style="clear: both;"></div>
+					<a href="login.html">直接登陆</a>					
+					<button id="register_confire" class="confirm" type="submit">注册</button>
+					</form>
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_left">
+					<div>
+						<p>关于我们</p>
+						<p>公司简介</p>
+						<p>发展历程</p>
+						<p>黑色系列</p>
+					</div>
+					<div>
+						<p>友情链接</p>
+						<p>早餐系列</p>
+						<p>简餐系列</p>
+						<p>饮品系列</p>
+					</div>
+					<div>
+						<p>联系我们</p>
+						<p>地址链接</p>
+						<p>微博账号</p>
+						<p>微信账号</p>
+					</div>
+				</div>
+				<div id="footer_right">
+					<div>
+						<p>微信二维码</p><img src="images/1.gif" /></div>
+					<div>
+						<p>微博二维码</p><img src="images/1.gif" /></div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script>
+			$(function(){
+				$("#register_confire").click(function(){
+					var user=$("#register_user").val();
+					var pwd=$("#register_pwd").val();
+					var repwd=$("#register_repwd").val();
+					var check=false;
+					if(user==''){
+						$("#register_user").siblings().html("请输入手机号/邮箱/用户名！");
+						check = true;
+					}
+					else{
+						$("#register_user").siblings().html("");
+					}
+					if(pwd==''){
+						$("#register_pwd").siblings().html("请输入密码！");
+						check = true;
+					}
+					else{
+						$("#register_pwd").siblings().html("");
+					}
+					if(repwd==''){
+						$("#register_repwd").siblings().html("请确认密码！");
+						check = true;
+					}
+					else{
+						if(repwd!=pwd){
+							$("#register_repwd").siblings().html("密码不一致！");
+							check = true;
+						}
+						else{
+							$("#register_repwd").siblings().html("");
+						}
+						
+					}
+					if(check){
+						return false;
+					}
+					else{
+						alert("注册成功！");
+						window.location.href="login.html";		
+						return false;
+					}
+				})
+			})
+		</script>
+		
+	</body>
+</html>

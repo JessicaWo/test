@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>面包诱惑</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />
+		<!--分页-->
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/test.css" />
+	</head>
+
+	<body>
+		<div id="main">
+			<header>
+				<div><input placeholder="请输入内容"><i class="fa fa-search"></i></div>
+				<ul>
+					<li>
+						<a href="login.html">登录</a>
+					</li>
+					<li>
+						<a href="register.html">注册</a>
+					</li>
+					<li><i class="fa fa-shopping-cart"></i></li>
+				</ul>
+
+			</header>
+			<div style="clear: both;"></div>
+			<nav>
+				<a href="index.html"><img src="images/logo.jpg" /></a>
+				<div>
+					<ul>
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+							<a href="products.html">所有产品</a>
+						</li>
+						<li>
+							<a href="introduction.htmlo">公司简介</a>
+						</li>
+						<li>
+							<a href="contact.html">联系我们</a>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+			<div style="clear: both;"></div>
+			<div id="crumb">
+				<a href="index.html">首页</a><i class="fa fa-angle-right"></i><span>所有文章</span>
+
+			</div>
+			<div id="article">
+				<div id="article_left">
+				<p>文章目录</p>
+				<ul id="accordion" class="accordion">
+
+					<li>
+						<a href="javascript:;" class="link filter" data-filter="all"><i class="fa fa-ellipsis-v"></i>全部文章</a>
+					</li>
+					<li>
+
+						<div class="link"><i class="fa fa-ellipsis-v"></i>分类<i class="fa fa-chevron-down"></i></div>
+
+						<ul class="submenu">
+
+							<li>
+								<a href="javascript:;" class="filter" data-filter="life">生活</a>
+							</li>
+
+							<li>
+								<a href="javascript:;" class="filter" data-filter="match">搭配</a>
+							</li>
+
+						</ul>
+
+					</li>
+
+				</ul>
+				<p>文章标签</p>
+				</div>
+				<div id="article_right">
+					
+					<p>文章列表</p>
+					<div id="content">
+					<ul id="article_list">
+							<li class="all match"><div class="article_right_list"><a href="content.html"><img src="images/talk1.jpg" /></a><div><p>牛奶与鸡蛋的邂逅</p><p>自然的馈赠加人类的智慧</p></div></div></li>
+							<li class="all life"><div class="article_right_list"><a href="content.html"><img src="images/talk2.jpg" /></a><div><p>健康的生活</p><p>蠢蠢面包的香味配丝滑奶茶</p></div></div></li>
+							<li class="all life"><div class="article_right_list"><a href="content.html"><img src="images/talk3.jpg" /></a><div><p>简约精致生活</p><p>千层糕的甜美与细腻开始美好一天</p></div></div></li>
+							<li class="all match"><div class="article_right_list"><a href="content.html"><img src="images/talk4.jpg" /></a><div><p>营养搭配</p><p>蔬菜水果与土司的结合</p></div></div></li>			
+							<li class="all match"><div class="article_right_list"><a href="content.html"><img src="images/talk1.jpg" /></a><div><p>牛奶与鸡蛋的邂逅</p><p>自然的馈赠加人类的智慧</p></div></div></li>
+							<li class="all life"><div class="article_right_list"><a href="content.html"><img src="images/talk2.jpg" /></a><div><p>健康的生活</p><p>蠢蠢面包的香味配丝滑奶茶</p></div></div></li>
+							<li class="all life"><div class="article_right_list"><a href="content.html"><img src="images/talk3.jpg" /></a><div><p>简约精致生活</p><p>千层糕的甜美与细腻开始美好一天</p></div></div></li>
+							<li class="all match"><div class="article_right_list"><a href="content.html"><img src="images/talk4.jpg" /></a><div><p>营养搭配</p><p>蔬菜水果与土司的结合</p></div></div></li>														
+						</ul>
+					</div>										
+						<div style="margin: 0;" class="holder"></div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+
+			<div id="footer">
+				<div id="footer_left">
+					<div>
+						<p>关于我们</p>
+						<p>公司简介</p>
+						<p>发展历程</p>
+						<p>黑色系列</p>
+					</div>
+					<div>
+						<p>友情链接</p>
+						<p>早餐系列</p>
+						<p>简餐系列</p>
+						<p>饮品系列</p>
+					</div>
+					<div>
+						<p>联系我们</p>
+						<p>地址链接</p>
+						<p>微博账号</p>
+						<p>微信账号</p>
+					</div>
+				</div>
+				<div id="footer_right">
+					<div>
+						<p>微信二维码</p><img src="images/1.gif" /></div>
+					<div>
+						<p>微博二维码</p><img src="images/1.gif" /></div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<script src="js/jquery-1.11.0.min.js"></script>
+			<!--分页-->
+		<script src="js/jPages.js"></script>
+		<script>
+//			导航
+			$(function() {
+				var Accordion = function(el, multiple) {
+					this.el = el || {};
+					this.multiple = multiple || false;
+
+					// Variables privadas
+					var links = this.el.find('.link');
+					// Evento
+					links.on('click', {
+						el: this.el,
+						multiple: this.multiple
+					}, this.dropdown)
+				}
+
+				Accordion.prototype.dropdown = function(e) {
+					var $el = e.data.el;
+					$this = $(this),
+						$next = $this.next();
+
+					$next.slideToggle();
+					$this.parent().toggleClass('open');
+
+					if(!e.data.multiple) {
+						$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+					};
+				}
+
+				var accordion = new Accordion($('#accordion'), false);
+			});
+			
+			$(function() {
+				
+				
+				function init(){
+					pageCodeInit();
+					filterProduct();
+					
+				}
+				init();
+				
+
+				/* initiate the plugin */
+				function pageCodeInit() {//分页函数
+					$("div.holder").jPages({
+						containerID: "article_list",
+						perPage: 5,
+						startPage: 1,
+						startRange: 1,
+						midRange: 5,
+						endRange: 1
+					});
+				}
+				function filterProduct(){
+					$(".filter").click(function(){
+						var a = $(this).attr('data-filter');
+						$('#article_list li').each(function(){
+							if($(this).hasClass(a)){
+								$(this).show();
+//								$(this).css('visibility', 'visible');
+							}else {
+								$(this).hide();
+//								$(this).css('visibility', 'hidden');
+							}
+						});
+						pageCodeInit();//调用分页函数，意为在过滤后刷新分页
+					})
+					
+					
+				}
+      
+
+
+			});
+		</script>
+	</body>
+
+</html>
